@@ -2,9 +2,6 @@ import os
 from invoke import task
 
 
-PYTHON_PATH = '../env/bin/python'
-
-
 # not to be formatted
 PLUGIN_TEMPLATE = """{% load cms_tags %}
 
@@ -80,7 +77,7 @@ def startplugin(ctx, plugin_name):
     plugin_template_path = "{0}/{0}.html".format(django_app_name)
 
     # create django app
-    ctx.run('{} manage.py startapp {}'.format(PYTHON_PATH, django_app_name))
+    ctx.run('{} manage.py startapp {}'.format(ctx['python']['path'], django_app_name))
 
     with open("{}/models.py".format(django_app_name), "w+") as plugin_models_file:
         plugin_models_file.write(MODEL_IMPORTS)
